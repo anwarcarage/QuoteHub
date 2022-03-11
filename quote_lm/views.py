@@ -4,23 +4,23 @@ from django.views.generic.edit import CreateView
 from .models import QuoteLm
 
 
-class CreateQuoteView(TemplateView):
+class CreateQuoteView(CreateView):
     models = QuoteLm
-    template_name = 'newquote.html'
+    template_name = 'createquote.html'
     fields = [
         'quote_id',
-        'customer_name',
-        'date',
-        'length',
-        'width',
-        'height',
-        'material',
-        'surface_finish',
-        'h_headers',
-        'v_headers',
-        'bubs_num',
-        'drill_bar_num',
-        'image'
+        # 'customer_name',
+        # 'date',
+        # 'length',
+        # 'width',
+        # 'height',
+        # 'material',
+        # 'surface_finish',
+        # 'h_headers',
+        # 'v_headers',
+        # 'bubs_num',
+        # 'drill_bar_num',
+        # 'image'
     ]
 
 class MainPageView(TemplateView):
@@ -30,6 +30,9 @@ class MainPageView(TemplateView):
         'customer_name',
         'date'
     ]
+
+class TestBaseView(TemplateView):
+    template_name = 'base.html'
 
 
 
