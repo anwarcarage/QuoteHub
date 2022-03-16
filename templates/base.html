@@ -17,126 +17,13 @@
       <div class="container">
         <div class="row">
 <!-- left column for user input -->
-          <div class="col">
-<!-- input for quote id -->
-            <div class="row mb-3">
-              <label for="inputId" class="col-sm-3 col-form-label">Quote Number:</label>
-              <div class="col">
-                <input type="text" class="form-control" id="inputId" value={{ QuoteLm.quote_id }}>
-              </div>
-            </div>
-<!-- input for customer name -->
-            <div class="row mb-3">
-              <label for="inputCustomer" class="col-sm-3 col-form-label" >Customer:</label>
-              <div class="col">
-                <select class="form-select" id="inputCustomer">
-                  <option selected>Name...</option>
-                  <option value="1">Boeing Canada</option>
-                  <option value="2">Boeing Seattle</option>
-                  <option value="3">Boeing St.Louis</option>
-                  <option value="4">L3 Harris</option>
-                  <option value="5">Lockheed Martin</option>
-                  <option value="6">Northrop Grumman</option>
-                  <option value="7">Sikorsky</option>
-                  <option value="8">Spirit</option>
-                </select>
-              </div>
-            </div>
-<!-- input for quote entry date -->
-            <div class="row mb-3">
-              <label for="inputDate" class="col-sm-3 col-form-label">Date:</label>
-              <div class="col">
-                <input type="date" class="form-control" id="inputDate" placeholder="--/--/----">
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <div class="row mb-1">
-                  Tool Dimensions (inches):
-                </div>
-<!-- input for tool length -->
-                <div class="row mb-3">
-                  <label for="inputLength" class="col-sm-3 col-form-label">Length:</label>
-                  <div class="col">
-                    <input type="text" class="form-control" id="inputLength">
-                  </div>
-                </div>
-<!-- input for tool width -->
-                <div class="row mb-3">
-                  <label for="inputWidth" class="col-sm-3 col-form-label">Width:</label>
-                  <div class="col">
-                    <input type="text" class="form-control" id="inputWidth">
-                  </div>
-                </div>
-<!-- input for tool height -->
-                <div class="row mb-3">
-                  <label for="inputHeight" class="col-sm-3 col-form-label">Height:</label>
-                  <div class="col">
-                    <input type="text" class="form-control" id="inputHeight">
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-<!-- input for material type -->
-                <label for="materialType" class="mb-1">Material:</label>
-                <select class="form-select mb-3" id="materialType">
-                  <option selected>Type...</option>
-                  <option value="1">Steel</option>
-                  <option value="2">Invar</option>
-                  <option value="3">Aluminum</option>
-                </select>
-<!-- input for surface finish -->
-                <label for="surfaceFinish" class="mb-1">Surface Finish:</label>
-                <select class="form-select mb-3" id="surfaceFinish">
-                  <option selected>Type...</option>
-                  <option value="1">32 Ra</option>
-                  <option value="2">64 Ra</option>
-                </select>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <div class="row mb-1">
-                  Number of Headers:
-                </div>
-<!-- input for number of horizontal headers -->
-                <div class="row mb-3">
-                  <label for="inputNumHeadersH" class="col-sm-5 col-form-label">Horizontal:</label>
-                  <div class="col">
-                    <input type="text" class="form-control" id="inputNumHeadersH">
-                  </div>
-                </div>
-<!-- input for number of vertical headers -->
-                <div class="row mb-3">
-                  <label for="inputNumHeadersV" class="col-sm-5 col-form-label">Vertical:</label>
-                  <div class="col">
-                    <input type="text" class="form-control" id="inputNumHeadersV">
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="row mb-1">
-                  Optional Quantities:
-                </div>
-<!-- input for back up block quantities -->
-                <div class="row mb-3">
-                  <label for="inputBubs" class="col-sm-6 col-form-label">Bubs:</label>
-                  <div class="col-sm-6">
-                    <input type="text" class="form-control" id="inputBubs">
-                  </div>
-                </div>
-<!-- input for drill bar quantities -->
-                <div class="row mb-3">
-                  <label for="inputDrillBars" class="col-sm-6 col-form-label">Drill Bars:</label>
-                  <div class="col-sm-6">
-                    <input type="text" class="form-control" id="inputDrillBars">
-                  </div>
-                </div>
-              </div>
+            <div class="col">
+                {% block content %}
+                {% endblock %}
 <!-- button bar -->
                 <div class="row mt-1">
                     <div class="col">
-                        <a class="btn btn-primary" href="{% url 'mainpage' %}" role="button">Back</a>
+                        <a class="btn btn-primary" href="{% url 'main_page' %}" role="button">Back</a>
                     </div>
                     <div class="col d-flex justify-content-end">
                         <button class="btn btn-primary me-2" type="button">Save</button>
@@ -144,7 +31,7 @@
                     </div>
                 </div>
             </div>
-          </div>
+
 <!-- Right column displaying hours/cost -->
           <div class="col">
 <!-- output table for hours calculated -->

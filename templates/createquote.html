@@ -4,9 +4,145 @@
 
 {% load crispy_forms_tags %}
 
-{% block new %}
+{% block content %}
   <form action="" method="post">
     {% csrf_token %}
-    {{ form|crispy }}
+<!-- first row group -->
+<!-- input for quote id -->
+    <div class="row mt-3 mb-3 d-flex align-items-center">
+      <div class="col-4">
+        <label>Quote Number:</label>
+      </div>
+      <div class="col">
+        {{ form.quote_id|as_crispy_field }}
+      </div>
+    </div>
+<!-- input for customer name -->
+    <div class="row mb-3 d-flex align-items-center">
+      <div class="col-4">
+        <label>Customer:</label>
+      </div>
+      <div class="col">
+        {{ form.customer_id|as_crispy_field }}
+      </div>
+    </div>
+<!-- input for quote entry date -->
+    <div class="row mb-3 d-flex align-items-center">
+      <div class="col-4">
+        <label>Date:</label>
+      </div>
+      <div class="col">
+        {{ form.date|as_crispy_field }}
+      </div>
+    </div>
+<!-- end first row group -->
+
+<!-- second row group -->
+    <div class="row">
+<!-- left column for dimensions -->
+      <div class="col">
+        <div class="row mb-1">
+          Tool Dimensions (inches):
+        </div>
+<!-- input for tool length -->
+        <div class="row mb-3 d-flex align-items-center">
+          <div class="col-3">
+            <label>Length:</label>
+          </div>
+          <div class="col">
+            {{ form.length|as_crispy_field }}
+          </div>
+        </div>
+<!-- input for tool width -->
+        <div class="row mb-3 d-flex align-items-center">
+          <div class="col-3">
+            <label>Width:</label>
+          </div>
+          <div class="col">
+            {{ form.width|as_crispy_field }}
+          </div>
+        </div>
+<!-- input for tool height -->
+        <div class="row mb-3 d-flex align-items-center">
+          <div class="col-3">
+            <label>Height:</label>
+          </div>
+          <div class="col">
+            {{ form.height|as_crispy_field }}
+          </div>
+        </div>
+      </div>
+<!-- right column for tool info -->
+      <div class="col">
+<!-- input for material type -->
+        <div class="row mb-3">
+          <div class="col">
+            <label>Material:</label>
+            {{ form.material|as_crispy_field }}
+          </div>
+        </div>
+<!-- input for surface finish -->
+        <div class="row mb-3">
+          <div class="col">
+            <label>Surface Finish:</label>
+           {{ form.surface_finish|as_crispy_field }}
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- end second row group -->
+
+<!-- third row group -->
+    <div class="row">
+<!-- left column -->
+      <div class="col">
+        <div class="row mb-1">
+          Number of headers
+        </div>
+<!-- number of horizontal headers -->
+        <div class="row mb-3 d-flex align-items-center">
+          <div class="col-5">
+            <label>Horizontal:</label>
+          </div>
+          <div class="col">
+            {{ form.h_headers|as_crispy_field }}
+          </div>
+        </div>
+<!-- number of vertical headers -->
+        <div class="row mb-3 d-flex align-items-center">
+          <div class="col-5">
+            <label>Vertical:</label>
+          </div>
+          <div class="col">
+            {{ form.v_headers|as_crispy_field }}
+          </div>
+        </div>
+      </div>
+<!-- right column -->
+      <div class="col">
+        <div class="row mb-1">
+          Optional Quantities
+        </div>
+<!-- number of back up blocks -->
+        <div class="row mb-3 d-flex align-items-center">
+          <div class="col-5">
+            <label>BuBs:</label>
+          </div>
+          <div class="col">
+            {{ form.bubs_num|as_crispy_field }}
+          </div>
+        </div>
+<!-- number of drill bars -->
+        <div class="row mb-3 d-flex align-items-center">
+          <div class="col-5">
+            <label>Drill Bars:</label>
+          </div>
+          <div class="col">
+            {{ form.drill_bar_num|as_crispy_field }}
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- end third row group -->
   </form>
-{% endblock new %}
+{% endblock %}
