@@ -1,6 +1,6 @@
 <!-- templates/base.html -->
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
   <head>
 <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -20,16 +20,6 @@
             <div class="col">
                 {% block content %}
                 {% endblock %}
-<!-- button bar -->
-                <div class="row mt-1">
-                    <div class="col">
-                        <a class="btn btn-primary" href="{% url 'main_page' %}" role="button">Back</a>
-                    </div>
-                    <div class="col d-flex justify-content-end">
-                        <button class="btn btn-primary me-2" type="button">Save</button>
-                        <button class="btn btn-primary" type="button">Calculate</button>
-                    </div>
-                </div>
             </div>
 
 <!-- Right column displaying hours/cost -->

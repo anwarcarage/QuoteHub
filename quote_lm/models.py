@@ -50,16 +50,25 @@ class QuoteLm(models.Model):
         (ONETWENTYFIVERA, '125 Ra'),
     ]
 
-    quote_id = models.CharField(max_length=30)
+    quote_id = models.CharField(
+        max_length=30,
+        default=NONE
+    )
     customer_id = models.CharField(
         max_length=30,
         choices=CUSTOMER,
         default=NONE
     )
     date = models.DateField(default=datetime.date.today())
-    length = models.PositiveIntegerField()
-    width = models.PositiveIntegerField()
-    height = models.PositiveIntegerField()
+    length = models.PositiveIntegerField(
+        default=NONE
+    )
+    width = models.PositiveIntegerField(
+        default=NONE
+    )
+    height = models.PositiveIntegerField(
+        default=NONE
+    )
     material = models.CharField(
         max_length=10,
         choices=MATERIAL,
@@ -70,10 +79,19 @@ class QuoteLm(models.Model):
         choices=SURFACEFINISH,
         default=NONE
     )
-    h_headers = models.PositiveIntegerField()
-    v_headers = models.PositiveIntegerField()
-    bubs_num = models.PositiveIntegerField()
-    drill_bar_num = models.PositiveIntegerField()
+    h_headers = models.PositiveIntegerField(
+        default=NONE
+    )
+    v_headers = models.PositiveIntegerField(
+        default=NONE
+    )
+    bubs_num = models.PositiveIntegerField(
+        default=NONE
+    )
+    drill_bar_num = models.PositiveIntegerField(
+        default=NONE
+    )
+    # surface_area = models.PositiveIntegerField()
     # image = models.ImageField()
 
 

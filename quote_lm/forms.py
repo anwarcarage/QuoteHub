@@ -8,9 +8,9 @@ class QuoteForm(ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper(self)
         self.helper.form_show_labels = False
-        self.fields['customer_id'].widget.attrs.update({'class':'form-select'})
-        self.fields['material'].widget.attrs.update({'class':'form-select'})
-        self.fields['surface_finish'].widget.attrs.update({'class':'form-select'})
+        self.fields['customer_id'].widget.attrs.update({'class': 'form-select'})
+        self.fields['material'].widget.attrs.update({'class': 'form-select'})
+        self.fields['surface_finish'].widget.attrs.update({'class': 'form-select'})
 
     class Meta:
         model = QuoteLm

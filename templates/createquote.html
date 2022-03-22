@@ -5,7 +5,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-  <form action="" method="post">
+  <form method="POST" class="post-form" action="calculate">
     {% csrf_token %}
 <!-- first row group -->
 <!-- input for quote id -->
@@ -94,7 +94,7 @@
 
 <!-- third row group -->
     <div class="row">
-<!-- left column -->
+<!-- third row left column -->
       <div class="col">
         <div class="row mb-1">
           Number of headers
@@ -118,7 +118,7 @@
           </div>
         </div>
       </div>
-<!-- right column -->
+<!-- third row right column -->
       <div class="col">
         <div class="row mb-1">
           Optional Quantities
@@ -144,5 +144,15 @@
       </div>
     </div>
 <!-- end third row group -->
+<!-- button bar -->
+    <div class="row mt-1">
+        <div class="col">
+            <a class="btn btn-primary" href="{% url 'main_page' %}" role="button">Back</a>
+        </div>
+        <div class="col d-flex justify-content-end">
+            <button class="btn btn-primary me-2" role="button">Save</button>
+            <button class="btn btn-primary me-2" type="submit">Calculate</button>
+        </div>
+    </div>
   </form>
 {% endblock %}
