@@ -5,154 +5,235 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-  <form method="POST" class="post-form" action="calculate">
+  <form method="POST" action="calculate">
     {% csrf_token %}
+<!-- left column for user input -->
+  <div class="row">
+        <div class="col">
 <!-- first row group -->
 <!-- input for quote id -->
-    <div class="row mt-3 mb-3 d-flex align-items-center">
-      <div class="col-4">
-        <label>Quote Number:</label>
-      </div>
-      <div class="col">
-        {{ form.quote_id|as_crispy_field }}
-      </div>
-    </div>
+            <div class="row mt-3 mb-3 d-flex align-items-center">
+              <div class="col-4">
+                <label>Quote Number:</label>
+              </div>
+              <div class="col">
+                {{ form.quote_id|as_crispy_field }}
+              </div>
+            </div>
 <!-- input for customer name -->
-    <div class="row mb-3 d-flex align-items-center">
-      <div class="col-4">
-        <label>Customer:</label>
-      </div>
-      <div class="col">
-        {{ form.customer_id|as_crispy_field }}
-      </div>
-    </div>
-<!-- input for quote entry date -->
-    <div class="row mb-3 d-flex align-items-center">
-      <div class="col-4">
-        <label>Date:</label>
-      </div>
-      <div class="col">
-        {{ form.date|as_crispy_field }}
-      </div>
-    </div>
+            <div class="row mb-3 d-flex align-items-center">
+              <div class="col-4">
+                <label>Customer:</label>
+              </div>
+              <div class="col">
+                {{ form.customer_id|as_crispy_field }}
+              </div>
+            </div>
+            <!-- input for quote entry date -->
+            <div class="row mb-3 d-flex align-items-center">
+              <div class="col-4">
+                <label>Date:</label>
+              </div>
+              <div class="col">
+                {{ form.date|as_crispy_field }}
+              </div>
+            </div>
 <!-- end first row group -->
 
 <!-- second row group -->
-    <div class="row">
+            <div class="row">
 <!-- left column for dimensions -->
-      <div class="col">
-        <div class="row mb-1">
-          Tool Dimensions (inches):
-        </div>
+              <div class="col">
+                <div class="row mb-1">
+                  Tool Dimensions (inches):
+                </div>
 <!-- input for tool length -->
-        <div class="row mb-3 d-flex align-items-center">
-          <div class="col-3">
-            <label>Length:</label>
-          </div>
-          <div class="col">
-            {{ form.length|as_crispy_field }}
-          </div>
-        </div>
+                <div class="row mb-3 d-flex align-items-center">
+                  <div class="col-3">
+                    <label>Length:</label>
+                  </div>
+                  <div class="col">
+                    {{ form.length|as_crispy_field }}
+                  </div>
+                </div>
 <!-- input for tool width -->
-        <div class="row mb-3 d-flex align-items-center">
-          <div class="col-3">
-            <label>Width:</label>
-          </div>
-          <div class="col">
-            {{ form.width|as_crispy_field }}
-          </div>
-        </div>
+                <div class="row mb-3 d-flex align-items-center">
+                  <div class="col-3">
+                    <label>Width:</label>
+                  </div>
+                  <div class="col">
+                    {{ form.width|as_crispy_field }}
+                  </div>
+                </div>
 <!-- input for tool height -->
-        <div class="row mb-3 d-flex align-items-center">
-          <div class="col-3">
-            <label>Height:</label>
-          </div>
-          <div class="col">
-            {{ form.height|as_crispy_field }}
-          </div>
-        </div>
-      </div>
+                <div class="row mb-3 d-flex align-items-center">
+                  <div class="col-3">
+                    <label>Height:</label>
+                  </div>
+                  <div class="col">
+                    {{ form.height|as_crispy_field }}
+                  </div>
+                </div>
+              </div>
 <!-- right column for tool info -->
-      <div class="col">
+              <div class="col">
 <!-- input for material type -->
-        <div class="row mb-3">
-          <div class="col">
-            <label>Material:</label>
-            {{ form.material|as_crispy_field }}
-          </div>
-        </div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <label>Material:</label>
+                    {{ form.material|as_crispy_field }}
+                  </div>
+                </div>
 <!-- input for surface finish -->
-        <div class="row mb-3">
-          <div class="col">
-            <label>Surface Finish:</label>
-           {{ form.surface_finish|as_crispy_field }}
-          </div>
-        </div>
-      </div>
-    </div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <label>Surface Finish:</label>
+                   {{ form.surface_finish|as_crispy_field }}
+                  </div>
+                </div>
+              </div>
+            </div>
 <!-- end second row group -->
 
 <!-- third row group -->
-    <div class="row">
+            <div class="row">
 <!-- third row left column -->
-      <div class="col">
-        <div class="row mb-1">
-          Number of headers
-        </div>
+              <div class="col">
+                <div class="row mb-1">
+                  Number of headers
+                </div>
 <!-- number of horizontal headers -->
-        <div class="row mb-3 d-flex align-items-center">
-          <div class="col-5">
-            <label>Horizontal:</label>
-          </div>
-          <div class="col">
-            {{ form.h_headers|as_crispy_field }}
-          </div>
-        </div>
+                <div class="row mb-3 d-flex align-items-center">
+                  <div class="col-5">
+                    <label>Horizontal:</label>
+                  </div>
+                  <div class="col">
+                    {{ form.h_headers|as_crispy_field }}
+                  </div>
+                </div>
 <!-- number of vertical headers -->
-        <div class="row mb-3 d-flex align-items-center">
-          <div class="col-5">
-            <label>Vertical:</label>
-          </div>
-          <div class="col">
-            {{ form.v_headers|as_crispy_field }}
-          </div>
-        </div>
-      </div>
+                <div class="row mb-3 d-flex align-items-center">
+                  <div class="col-5">
+                    <label>Vertical:</label>
+                  </div>
+                  <div class="col">
+                    {{ form.v_headers|as_crispy_field }}
+                  </div>
+                </div>
+              </div>
 <!-- third row right column -->
-      <div class="col">
-        <div class="row mb-1">
-          Optional Quantities
-        </div>
+              <div class="col">
+                <div class="row mb-1">
+                  Optional Quantities
+                </div>
 <!-- number of back up blocks -->
-        <div class="row mb-3 d-flex align-items-center">
-          <div class="col-5">
-            <label>BuBs:</label>
-          </div>
-          <div class="col">
-            {{ form.bubs_num|as_crispy_field }}
-          </div>
-        </div>
+                <div class="row mb-3 d-flex align-items-center">
+                  <div class="col-5">
+                    <label>BuBs:</label>
+                  </div>
+                  <div class="col">
+                    {{ form.bubs_num|as_crispy_field }}
+                  </div>
+                </div>
 <!-- number of drill bars -->
-        <div class="row mb-3 d-flex align-items-center">
-          <div class="col-5">
-            <label>Drill Bars:</label>
-          </div>
-          <div class="col">
-            {{ form.drill_bar_num|as_crispy_field }}
-          </div>
-        </div>
-      </div>
-    </div>
+                <div class="row mb-3 d-flex align-items-center">
+                  <div class="col-5">
+                    <label>Drill Bars:</label>
+                  </div>
+                  <div class="col">
+                    {{ form.drill_bar_num|as_crispy_field }}
+                  </div>
+                </div>
+              </div>
+            </div>
 <!-- end third row group -->
 <!-- button bar -->
-    <div class="row mt-1">
+            <div class="row mt-1">
+                <div class="col">
+                    <a class="btn btn-primary" href="{% url 'main_page' %}" role="button">Back</a>
+                </div>
+                <div class="col d-flex justify-content-end">
+                    <button class="btn btn-primary me-2" role="button">Delete</button>
+                    <button class="btn btn-primary me-2" type="submit">Calculate</button>
+                </div>
+            </div>
+        </div>
+<!-- Right column displaying hours/cost -->
         <div class="col">
-            <a class="btn btn-primary" href="{% url 'main_page' %}" role="button">Back</a>
+<!-- output table for hours calculated -->
+            <div class="row">
+                <table class="table table-striped table table-sm border border-1">
+                  <thead>
+                    <tr>
+                        <th scope="col">Department</th>
+                        <th scope="col">Hours</th>
+                        <th scope="col">Cost</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <th scope="row">Weld</th>
+                        <td>{{ hours.weld_hours }}</td>
+                        <td>${{ price.weld_price }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Fit/Tack</th>
+                        <td>{{ hours.fit_hours }}</td>
+                        <td>${{ price.fit_price }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">NC Program</th>
+                        <td>{{ hours.program_hours }}</td>
+                        <td>${{ price.program_price }}</td>
+
+                    </tr>
+                    <tr>
+                        <th scope="row">NC Machine</th>
+                        <td>{{ hours.machine_hours }}</td>
+                        <td>${{ price.machine_price }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Bench</th>
+                        <td>{{ hours.bench_hours }}</td>
+                        <td>${{ price.bench_price }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Assembly</th>
+                        <td>{{ hours.assembly_hours }}</td>
+                        <td>${{ price.assembly_price }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Shipping</th>
+                        <td>{{ hours.shipping_hours }}</td>
+                        <td>${{ price.shipping_price }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Laser Inspect</th>
+                        <td>{{ hours.laser_hours }}</td>
+                        <td>${{ price.laser_price }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">QA Inspect</th>
+                        <td>{{ hours.inspect_hours }}</td>
+                        <td>${{ price.inspect_price }}</td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                        <th scope="row">Total</th>
+                        <td>{{ hours.total_hours }}</td>
+                        <td>${{ price.total_price }}</td>
+                    </tr>
+                  </tfoot>
+                </table>
+            </div>
+<!-- tool image display -->
+            <div class="row">
+              <div class="container border border-1" style="width: 200px; height: 200px">
+                image here
+              </div>
+            </div>
         </div>
-        <div class="col d-flex justify-content-end">
-            <button class="btn btn-primary me-2" role="button">Save</button>
-            <button class="btn btn-primary me-2" type="submit">Calculate</button>
-        </div>
-    </div>
+  </div>
   </form>
 {% endblock %}
