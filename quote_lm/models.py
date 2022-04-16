@@ -80,7 +80,7 @@ class QuoteLm(models.Model):
     drill_bar_num = models.PositiveIntegerField(default=NONE)
 
     def __str__(self):
-        return self.quote_id
+        return self.id
 
 
 class CalcHour(models.Model):
@@ -114,14 +114,14 @@ class CalcPrice(models.Model):
 class SearchQuote(models.Model):
     # customer variables
     NONE = ''
-    BOEING_CANADA = 'BC'
-    BOEING_SEATTLE = 'BS'
-    BOEING_STLOUIS = 'BL'
-    L3_HARRIS = 'L3'
-    LOCKHEED = 'LM'
-    NORTHROP = 'NG'
-    SIKORSKY = 'SK'
-    SPIRIT = "SP"
+    BOEING_CANADA = 'Boeing Canada'
+    BOEING_SEATTLE = 'Boeing Seattle'
+    BOEING_STLOUIS = 'Boeing St.Louis'
+    L3_HARRIS = 'L3 Harris'
+    LOCKHEED = 'Lockheed Martin'
+    NORTHROP = 'Northrop Grumman'
+    SIKORSKY = 'Sikorsky'
+    SPIRIT = 'Spirit'
 
     CUSTOMER = [
         (NONE, 'Name...'),
@@ -138,13 +138,15 @@ class SearchQuote(models.Model):
     quote_id = models.CharField(
         max_length=30,
         default=NONE,
+        blank=True
     )
     customer_id = models.CharField(
         max_length=30,
         choices=CUSTOMER,
-        default=NONE
+        default=NONE,
+        blank=True
     )
-    date = models.DateField()
+    date = models.DateField(blank=True)
 
 
 

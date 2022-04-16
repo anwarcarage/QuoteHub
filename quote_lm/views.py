@@ -4,15 +4,14 @@ from .models import QuoteLm, CalcHour, CalcPrice, SearchQuote
 from .forms import QuoteForm, HoursForm, PriceForm, SearchForm
 from django.shortcuts import render
 from .DBWork import hours_calculate
+from django.db.models import Q
 from django.shortcuts import HttpResponse
+
 
 # calls new quote page
 def quote_new(request):
-
     form = QuoteForm
-
     context = {'form': form}
-
     return render(request, 'createquote.html', context)
 
 
@@ -36,23 +35,61 @@ def calculate(request):
 # calls main page with six most recent entries by date (initial load)
 def mainpage(request):
     form = SearchForm
-    recent = QuoteLm.objects.order_by('-date')[:6]
+    display = QuoteLm.objects.order_by('-date')[:6]
 
-    context = {'form': form, 'recent': recent}
+    context = {'form': form, 'display': display}
 
     return render(request, 'mainpage.html', context)
 
 
+# search for quote and/or customer
 def search_quotes(request):
-    form = SearchForm
+    form = SearchForm(request.GET)
     if form.is_valid():
-        quote_id = form.cleaned_data['quote_id']
-        customer = form.cleaned_data['customer_id']
-        date = form.cleaned_data['data']
-        form = QuoteLm.objects.filter(quote_id=quote_id)
-        context = {'form': form}
+        query1 = form.cleaned_data.get('quote_id')
+        query2 = form.cleaned_data.get('customer_id')
+        if query1 and query2:
+            display = QuoteLm.objects.filter(quote_id__contains=query1).filter(customer_id=query2)
+            context = {'form': form, 'display': display}
+            return render(request, 'mainpage.html', context)
+        if query1:
+            display = QuoteLm.objects.filter(quote_id__contains=query1)
+            context = {'form': form, 'display': display}
+            return render(request, 'mainpage.html', context)
+        if query2:
+            display = QuoteLm.objects.filter(customer_id=query2)
+            context = {'form': form, 'display': display}
+            return render(request, 'mainpage.html', context)
 
-        return render(request, 'mainpage.html', context)
+
+def edit_quote(request):
+    query = request.GET.get('id', False)                    # gets quote_lm.id value from card
+    if request.method == 'GET':
+        quote = QuoteLm.objects.get(id=query)
+        form = QuoteForm(instance=quote)
+        hours = CalcHour.objects.get(quote_id_id=query)
+        price = CalcPrice.objects.get(quote_id_id=query)
+        context = {'form': form, 'hours': hours, 'price': price}
+        return render(request, 'updatequote.html', context)
+    if request.method == 'POST':
+        # quote = QuoteLm.objects.get(id=query)
+        # compare = QuoteForm(instance=quote)
+        form = QuoteForm(request.POST)
+        if form.is_valid():
+            test = form.save()
+            track_id = test.id
+            hours_calculate(track_id)
+            hours = CalcHour.objects.get(quote_id_id=track_id)
+            price = CalcPrice.objects.get(quote_id_id=track_id)
+            context = {'form': form, 'hours': hours, 'price': price}
+            return render(request, 'updatequote.html', context)
+
+
+def delete_quote(request):
+    query = request.GET.get('id', False)                    # gets quote_lm.id value from card
+    quote = QuoteLm.objects.get(id=query)
+    quote.delete()
+    return mainpage(request)
 
 
 class MainPageView(TemplateView):
@@ -61,7 +98,7 @@ class MainPageView(TemplateView):
     fields = [
         'quote_id',
         'customer_id',
-        'date'
+        'date',
     ]
 
 

@@ -1,11 +1,11 @@
-<!-- templates/createquote.html -->
+<!-- templates/updatequote.html -->
 
 {% extends 'base.html' %}
 
 {% load crispy_forms_tags %}
 
 {% block content %}
-  <form method="POST" action="calculate">
+  <form method="POST">
     {% csrf_token %}
 <!-- left column for user input -->
   <div class="row">
@@ -153,7 +153,8 @@
                     <a class="btn btn-primary" href="{% url 'main_page' %}" role="button">Back</a>
                 </div>
                 <div class="col d-flex justify-content-end">
-                    <button class="btn btn-primary me-2" type="submit">Calculate</button>
+                    <button class="btn btn-primary me-2" role="button">Delete</button>
+                    <button class="btn btn-primary me-2" type="submit">Update</button>
                 </div>
             </div>
         </div>

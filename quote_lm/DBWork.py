@@ -20,6 +20,7 @@ def hours_calculate(track_id):
     v_headers = output.v_headers
     width = output.width
 
+    # math out hours using user input values
     quote_id_id = track_id
     weld_hours = calc_weld(material, length, width, height, h_headers, v_headers)
     fit_hours = weld_hours // 2
@@ -30,8 +31,8 @@ def hours_calculate(track_id):
     shipping_hours = calc_shipping(length, width, height)
     laser_hours = calc_laser(length, width)
     inspect_hours = calc_qa(length, width)
-    total_hours = (
-                weld_hours + fit_hours + machine_hours + program_hours + bench_hours + assembly_hours + shipping_hours + laser_hours + inspect_hours)
+    total_hours = (weld_hours + fit_hours + machine_hours + program_hours + bench_hours + assembly_hours +
+                   shipping_hours + laser_hours + inspect_hours)
 
     price = calc_price(weld_hours, fit_hours, machine_hours, program_hours, bench_hours, assembly_hours, shipping_hours,
                        laser_hours, inspect_hours, track_id)
