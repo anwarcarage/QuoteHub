@@ -54,6 +54,58 @@ def hours_calculate(track_id):
     conn.close()
 
 
+def update_calculate(track_id):
+    # connect to database
+    conn = sqlite3.connect(database='db.sqlite3')
+    # create cursor object
+    cursor = conn.cursor()
+    # grab row that matches quote_id with track_id
+    output = QuoteLm.objects.get(id=track_id)
+
+    # assigning database data to variables
+    drill_bar_num = output.drill_bar_num
+    h_headers = output.h_headers
+    height = output.height
+    length = output.length
+    material = output.material
+    surface_finish = output.surface_finish
+    v_headers = output.v_headers
+    width = output.width
+
+    # math out hours using user input values
+    quote_id_id = track_id
+    weld_hours = calc_weld(material, length, width, height, h_headers, v_headers)
+    fit_hours = weld_hours // 2
+    machine_hours = calc_nc(material, length, width, drill_bar_num)
+    program_hours = machine_hours // 4
+    bench_hours = calc_bench(material, length, width, surface_finish)
+    assembly_hours = calc_assembly(length, width, material, drill_bar_num)
+    shipping_hours = calc_shipping(length, width, height)
+    laser_hours = calc_laser(length, width)
+    inspect_hours = calc_qa(length, width)
+    total_hours = (weld_hours + fit_hours + machine_hours + program_hours + bench_hours + assembly_hours +
+                   shipping_hours + laser_hours + inspect_hours)
+
+    price = calc_price(weld_hours, fit_hours, machine_hours, program_hours, bench_hours, assembly_hours, shipping_hours,
+                       laser_hours, inspect_hours, track_id)
+
+    # update calchour table
+    cursor.execute('UPDATE quote_lm_calchour SET weld_hours=?, fit_hours=?, program_hours=?, machine_hours=?, '
+                   'bench_hours=?, assembly_hours=?, shipping_hours=?, laser_hours=?, inspect_hours=?, total_hours=? '
+                   ' WHERE quote_id_id=?', (weld_hours, fit_hours, program_hours, machine_hours, bench_hours,
+                                             assembly_hours, shipping_hours, laser_hours, inspect_hours,
+                                             total_hours, quote_id_id))
+    # update calcprice table
+    cursor.execute('UPDATE quote_lm_calcprice SET weld_price=?, fit_price=?, program_price=?, machine_price=?, '
+                   'bench_price=?, assembly_price=?, shipping_price=?, laser_price=?, inspect_price=?, total_price=? '
+                   'WHERE quote_id_id=?', price)
+
+    # commit changes
+    conn.commit()
+    # close database connection
+    conn.close()
+
+
 # calculates weld hours
 def calc_weld(material, length, width, height, h_headers, v_headers):
     if material == 'AL':

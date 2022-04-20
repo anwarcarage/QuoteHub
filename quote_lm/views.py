@@ -3,8 +3,7 @@ from django.views.generic.edit import CreateView
 from .models import QuoteLm, CalcHour, CalcPrice, SearchQuote
 from .forms import QuoteForm, HoursForm, PriceForm, SearchForm
 from django.shortcuts import render
-from .DBWork import hours_calculate
-from django.db.models import Q
+from .DBWork import hours_calculate, update_calculate
 from django.shortcuts import HttpResponse
 
 
@@ -72,23 +71,27 @@ def edit_quote(request):
         context = {'form': form, 'hours': hours, 'price': price}
         return render(request, 'updatequote.html', context)
     if request.method == 'POST':
-        # quote = QuoteLm.objects.get(id=query)
-        # compare = QuoteForm(instance=quote)
-        form = QuoteForm(request.POST)
+        quote = QuoteLm.objects.get(id=query)
+        form = QuoteForm(request.POST, instance=quote)
         if form.is_valid():
-            test = form.save()
-            track_id = test.id
-            hours_calculate(track_id)
-            hours = CalcHour.objects.get(quote_id_id=track_id)
-            price = CalcPrice.objects.get(quote_id_id=track_id)
+            form.save()
+            update_calculate(track_id=query)
+            hours = CalcHour.objects.get(quote_id_id=query)
+            price = CalcPrice.objects.get(quote_id_id=query)
             context = {'form': form, 'hours': hours, 'price': price}
             return render(request, 'updatequote.html', context)
+        else:
+            return HttpResponse(form.errors)
 
 
 def delete_quote(request):
     query = request.GET.get('id', False)                    # gets quote_lm.id value from card
     quote = QuoteLm.objects.get(id=query)
+    hours = CalcHour.objects.get(quote_id_id=query)
+    price = CalcPrice.objects.get(quote_id_id=query)
     quote.delete()
+    hours.delete()
+    price.delete()
     return mainpage(request)
 
 
